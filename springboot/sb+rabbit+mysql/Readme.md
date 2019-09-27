@@ -30,7 +30,7 @@ Booking MS
     Schema Name -> bookingmsdb (user: bookingmsdb / pw: bookingmsdb)
     Tables ->
     
-    Cargo
+    ##Cargo Table DDL
 	CREATE TABLE `cargo` (
 	  `ID` int(11) NOT NULL AUTO_INCREMENT,
 	  `BOOKING_ID` varchar(20) NOT NULL,
@@ -55,7 +55,7 @@ Booking MS
 	) ENGINE=InnoDB AUTO_INCREMENT=2923 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
     
     
-    Leg
+    ##Leg Table DDL
     	CREATE TABLE `LEG` (
 	  `ID` int(11) NOT NULL AUTO_INCREMENT,
 	  `LOAD_TIME` timestamp NULL DEFAULT NULL,
@@ -67,8 +67,7 @@ Booking MS
 	  PRIMARY KEY (`ID`)
 	) ENGINE=InnoDB AUTO_INCREMENT=3095 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
     
-    Location
-    
+    ##Location Table DDL
     CREATE TABLE `location` (
   	`ID` int(11) DEFAULT NULL,
   	`NAME` varchar(50) DEFAULT NULL,
@@ -85,6 +84,7 @@ Booking MS
     Run command -> java -jar bookingms-0.0.1-SNAPSHOT.jar
     
     JSON Requests (Test via Postman) ->
+    
     
     Cargo Booking (http://localhost:8080/cargobooking)
     --------------------------------------------------
@@ -114,14 +114,14 @@ Booking MS
     Schema Name -> routingmsdb (user: routingmsdb / pw: routingmsdb)
     Tables ->
     
-    voyage
+    ##Voyage Table DDL
     CREATE TABLE `voyage` (
   	`Id` int(11) NOT NULL AUTO_INCREMENT,
   	`voyage_number` varchar(20) NOT NULL,
   	PRIMARY KEY (`Id`)
 	) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
     
-    carrier_movement
+    ##Carrier Movement Table DDL -
     CREATE TABLE `carrier_movement` (
 	  `Id` int(11) NOT NULL AUTO_INCREMENT,
 	  `arrival_location_id` varchar(100) DEFAULT NULL,
@@ -132,7 +132,7 @@ Booking MS
 	  PRIMARY KEY (`Id`)
 	) ENGINE=InnoDB AUTO_INCREMENT=1358 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
     
-    Data ->
+    ### Data to ensure Routing works fine ->
     	insert voyage (Id,voyage_number) values(3,'0100S');
 	insert voyage (Id,voyage_number) values(4,'0101S');
 	insert voyage (Id,voyage_number) values(5,'0102S');
@@ -153,7 +153,7 @@ Tracking MS
     Schema Name -> trackingmsdb (user: trackingmsdb/pw:trackingmsdb)
     Tables ->
     
-    tracking_activity
+    ##Tracking_activity DDL
    	 CREATE TABLE `tracking_activity` (
 	  `Id` int(11) NOT NULL AUTO_INCREMENT,
 	  `tracking_number` varchar(20) NOT NULL,
@@ -161,7 +161,7 @@ Tracking MS
 	  PRIMARY KEY (`Id`)
 	) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
     
-    tracking_handling_events
+    ##Tracking_handling_events DDL
 	  CREATE TABLE `tracking_handling_events` (
 	  `Id` int(11) NOT NULL AUTO_INCREMENT,
 	  `tracking_id` int(11) DEFAULT NULL,
@@ -184,7 +184,7 @@ Handling MS
     Schema Name -> handlingmsdb (user: handlingmsdb/pw:handlingmsdb)
     Tables ->
 
-    handling_activity
+    ##Handling_activity DDL
 	  CREATE TABLE `handling_activity` (
 	  `id` int(11) NOT NULL AUTO_INCREMENT,
 	  `event_completion_time` timestamp NULL DEFAULT NULL,
