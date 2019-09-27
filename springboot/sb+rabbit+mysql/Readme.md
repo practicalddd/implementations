@@ -24,7 +24,8 @@ The test case is as follows
 
 Booking MS
 
-    This MS takes care of all the operations associated with the booking of the Cargo. The MySql Schemas and the Rabbit MQ    Exchanges have to be setup (creation and binding) before running this microservice
+    This MS takes care of all the operations associated with the booking of the Cargo. 
+    The MySql Schemas and the Rabbit MQ    Exchanges have to be setup (creation and binding) before running this microservice
     
     Server Port -> 8080
     Schema Name -> bookingmsdb (user: bookingmsdb / pw: bookingmsdb)
