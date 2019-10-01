@@ -37,7 +37,7 @@ The Cargo Tracker Application acts as the reference application for the DDD impl
       - Cargo Routed
       - Cargo Handled
       
-   *Tracking Bounded Context* - This deals with all aspects of Handling Business Capabilities of the Cargo Tracker Application
+   *Handling Bounded Context* - This deals with all aspects of Handling Business Capabilities of the Cargo Tracker Application
   
     Commands
       - Handle a Cargo
