@@ -4,7 +4,7 @@ This Chapter contains a complete DDD implementation of the Cargo Tracker applica
 
 The implementation adopts a microservices based architectural style and uses the following technologies
   - Project Helidon MP (1.2) as the MicroProfile implementation
-  - MySql schemas for the Databases and
+  - Oracle Autonomous Database Cloud as the storage and
   - RabbitMQ as the microservices messaging choreography mechanism
   
 The documentation covers the setup and testing process needed to run the microservices correctly. The details are given for each separate microservice (Booking / Routing / Tracking and Handling)
@@ -28,6 +28,39 @@ Before running the services, you would need to install the RabbitMQ CDI Adaptor 
 	mvn install:install-file -Dfile=rabbitadaptor-cdi-1.0.jar -DpomFile=rabbitadaptor-cdi-1.0.pom
 
 
+# Oracle Autonomous Database Cloud Setup
+
+Oracle offers an always-free Autonomous Database schema ideal for Development/POCs. Scripts to create the database schemas within the Autonomous Database are given below.
+
+	CREATE USER bookingmsdb IDENTIFIED BY <<PASSWORD>>;
+	ALTER USER bookingmsdb QUOTA UNLIMITED ON data;
+	GRANT CONNECT TO bookingmsdb;
+	GRANT CREATE TABLE,CREATE SEQUENCE TO bookingmsdb;
+	GRANT CREATE SESSION TO bookingmsdb;
+
+	CREATE USER routingmsdb IDENTIFIED BY <<PASSWORD>>;
+	ALTER USER routingmsdb QUOTA UNLIMITED ON data;
+	GRANT CONNECT TO routingmsdb;
+	GRANT CREATE TABLE,CREATE SEQUENCE TO routingmsdb;
+	GRANT CREATE SESSION TO routingmsdb;
+
+	CREATE USER trackingmsdb IDENTIFIED BY <<PASSWORD>>;
+	ALTER USER trackingmsdb QUOTA UNLIMITED ON data;
+	GRANT CONNECT TO trackingmsdb;
+	GRANT CREATE TABLE,CREATE SEQUENCE TO trackingmsdb;
+	GRANT CREATE SESSION TO trackingmsdb;
+
+	CREATE USER handlingmsdb IDENTIFIED BY <<PASSWORD>>;
+	ALTER USER handlingmsdb QUOTA UNLIMITED ON data;
+	GRANT CONNECT TO handlingmsdb;
+	GRANT CREATE TABLE,CREATE SEQUENCE TO handlingmsdb;
+	GRANT CREATE SESSION TO handlingmsdb;
+	
+Once you create the Database, please download the Wallet file to your local machine(https://docs.oracle.com/en/cloud/paas/atp-cloud/atpud/connect-using-client-application.html#GUID-5F661631-39FA-49BA-82D6-7C089D567A1F). 
+
+This needs to be configured in each microservice's microprofile-config.properties (javax.sql.DataSource.routingms.URL=jdbc:oracle:thin:@<<DB_NAME>>_low?TNS_ADMIN=<<WALLET_FOLDER_LOCATION>>)
+
+The DB_NAME should be pointing to the autonomous database that you created in the Oracle cloud, and the TNS_ADMIN to the wallet file that you would have downloaded. The download is available from the service console of the Database that is created
 
 # Microservices
 
