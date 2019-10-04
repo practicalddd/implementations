@@ -56,11 +56,12 @@ Oracle offers an always-free Autonomous Database schema ideal for Development/PO
 	GRANT CREATE TABLE,CREATE SEQUENCE TO handlingmsdb;
 	GRANT CREATE SESSION TO handlingmsdb;
 	
-Once you create the Database, please download the Wallet file to your local machine(https://docs.oracle.com/en/cloud/paas/atp-cloud/atpud/connect-using-client-application.html#GUID-5F661631-39FA-49BA-82D6-7C089D567A1F). 
+Once you create the Database, please download the Wallet file to your local machine(https://docs.oracle.com/en/cloud/paas/atp-cloud/atpud/connect-using-client-application.html#GUID-5F661631-39FA-49BA-82D6-7C089D567A1F). The download is available from the service console of the Database that is created (Service Console -> Administration -> Download Client Credentials)
 
 This needs to be configured in each microservice's microprofile-config.properties (javax.sql.DataSource.routingms.URL=jdbc:oracle:thin:@<<DB_NAME>>_low?TNS_ADMIN=<<WALLET_FOLDER_LOCATION>>)
 
-The DB_NAME should be pointing to the autonomous database that you created in the Oracle cloud, and the TNS_ADMIN to the wallet file that you would have downloaded. The download is available from the service console of the Database that is created
+The DB_NAME should be pointing to the autonomous database that you created in the Oracle cloud, and the TNS_ADMIN to the wallet file that you would have downloaded. 
+
 
 # Microservices
 
