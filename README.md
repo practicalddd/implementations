@@ -1,6 +1,6 @@
 # Introduction
 
-This contains Practical DDD implementations for the Cargo Tracker Application across multiple programming languages and frameworks. It aims to demonstrate DDD concepts in the context of an execution platform. For a detailed walkthrough of the implementations please purchase the book -> 
+This contains Practical DDD implementations for the Cargo Tracker Application across multiple programming languages and frameworks. It aims to demonstrate DDD concepts in the context of an execution platform. For a detailed walkthrough of the implementations please purchase the book -> https://www.amazon.com/s?k=practical+domain-driven+design+in+enterprise+java&crid=1R1SOSED7GAXW&sprefix=practical+domain%2Caps%2C389&ref=nb_sb_ss_i_1_16
 
 # Cargo Tracker Application
 
