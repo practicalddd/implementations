@@ -65,9 +65,9 @@ Week 2 (*Available*) - Jakarta EE 8 (Open Liberty 19.0.0.9) + MySql
 
 Week 3 (*Available*) - MicroProfile 3.0 (Helidon v1.3.1) + Oracle DB Autonomous Cloud + RabbitMQ
 
-Week 4 (**In Progress**) - Axon Framework 4.1  + Axon Server 4.1
+Week 4 (**In Progress**) - MicroProfile 2.2 (Payara Micro) + MySql + Payara Clustered Events
 
-Week 5 (Planned) - MicroProfile 2.2 (Payara Micro) + MySql + RabbitMQ
+Week 5 (Planned) - Axon Framework 4.2 + Axon Server 4.2
 
 
 
