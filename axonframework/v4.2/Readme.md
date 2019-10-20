@@ -1,14 +1,18 @@
-# Spring Boot DDD implementation
+# Axon Framework Implementation v4.2 with Axon Server Standard Edition v4.2
 
-This Chapter contains a complete DDD implementation of the Cargo Tracker application using the Spring Boot platform.
+This Chapter contains a complete DDD implementation of the Cargo Tracker application utilizing the Axon Framework and the Axon Server Standard Edition v4.2
 
-The implementation adopts a microservices based architectural style and uses the following technologies
-  - Spring Boot as the core chassis
-  - Spring Cloud streams for the microservices choreography infrastructure
-  - RabbitMQ as the microservices messaging broker
-  - Spring Data as the Data management platform
+The implementation adopts a CQRS / Event Sourcing / Microservices based architectural style and uses the following technologies
+
+  - Axon Framework as the CQRS framework
+  - Axon Server SE as the event source / store
+  - Axon Server SE as the event broker
   
 The documentation covers the setup and testing process needed to run the microservices correctly. The details are given for each separate microservice (Booking / Routing / Tracking and Handling)
+
+# Axon Server SE setup
+
+Axon Server SE can be downloaded from the website (https://axoniq.io/download) . Running it is as simple as running a jar file (java -jar axonserver.jar). Access the following URL from the browser (http://localhost:8024) to check if the server is running OK. While all events are stored in Axon's purpose built event store database, the projections are built on top of MySql Schemas.
 
 # Test Case
 
@@ -24,70 +28,30 @@ The test case is as follows
 
 Booking MS
 
-    This MS takes care of all the operations associated with the booking of the Cargo. 
-    The MySql Schemas and the Rabbit MQ    Exchanges have to be setup (creation and binding) before running this microservice
+    This MS takes care of all the operations associated with the booking of the Cargo. It stores events in Axon's event store and builds a projection for the Cargo Details (Cargo Summary) on a MySql Database
     
-    Server Port -> 8080
-    Schema Name -> bookingmsdb (user: bookingmsdb / pw: bookingmsdb)
+    Server Port -> 8081
+    Schema Name -> bookingquerymsdb (user: bookingquerymsdb / pw: bookingquerymsdb)
     Tables ->
     
     ##Cargo Table DDL
-	CREATE TABLE `cargo` (
-	  `ID` int(11) NOT NULL AUTO_INCREMENT,
-	  `BOOKING_ID` varchar(20) NOT NULL,
-	  `TRANSPORT_STATUS` varchar(100) NOT NULL,
-	  `ROUTING_STATUS` varchar(100) NOT NULL,
-	  `spec_origin_id` varchar(20) DEFAULT NULL,
-	  `spec_destination_id` varchar(20) DEFAULT NULL,
-	  `SPEC_ARRIVAL_DEADLINE` date DEFAULT NULL,
-	  `origin_id` varchar(20) DEFAULT NULL,
-	  `BOOKING_AMOUNT` int(11) NOT NULL,
-	  `handling_event_id` int(11) DEFAULT NULL,
-	  `next_expected_location_id` varchar(20) DEFAULT NULL,
-	  `next_expected_handling_event_type` varchar(20) DEFAULT NULL,
-	  `next_expected_voyage_id` varchar(20) DEFAULT NULL,
-	  `last_known_location_id` varchar(20) DEFAULT NULL,
-	  `current_voyage_number` varchar(100) DEFAULT NULL,
-	  `last_handling_event_id` int(11) DEFAULT NULL,
-	  `last_handling_event_type` varchar(20) DEFAULT NULL,
-	  `last_handling_event_location` varchar(20) DEFAULT NULL,
-	  `last_handling_event_voyage` varchar(20) DEFAULT NULL,
-	  PRIMARY KEY (`ID`)
-	) ENGINE=InnoDB AUTO_INCREMENT=2923 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+	CREATE TABLE `cargo_summary_projection` (
+  		`booking_id` varchar(20) NOT NULL,
+  		`transport_status` varchar(100) NOT NULL,
+  		`routing_status` varchar(100) NOT NULL,
+  		`spec_origin_id` varchar(100) NOT NULL,
+  		`spec_destination_id` varchar(100) NOT NULL,
+  		`deadline` date DEFAULT NULL,
+  		PRIMARY KEY (`booking_id`)
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
     
-    
-    ##Leg Table DDL
-    	CREATE TABLE `LEG` (
-	  `ID` int(11) NOT NULL AUTO_INCREMENT,
-	  `LOAD_TIME` timestamp NULL DEFAULT NULL,
-	  `UNLOAD_TIME` timestamp NULL DEFAULT NULL,
-	  `load_location_id` varchar(20) DEFAULT NULL,
-	  `unload_location_id` varchar(20) DEFAULT NULL,
-	  `voyage_number` varchar(100) DEFAULT NULL,
-	  `CARGO_ID` int(11) DEFAULT NULL,
-	  PRIMARY KEY (`ID`)
-	) ENGINE=InnoDB AUTO_INCREMENT=3095 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-    
-    ##Location Table DDL
-    CREATE TABLE `location` (
-  	`ID` int(11) DEFAULT NULL,
-  	`NAME` varchar(50) DEFAULT NULL,
-  	`UNLOCODE` varchar(100) DEFAULT NULL
-	) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-    
-    
-    Exchanges/Queues -> 
-    
-    Exchange (cargotracker.cargobookings) -> Queue (cargotracker.bookingsqueue) 
-    Exchange (cargotracker.cargoroutings) -> Queue (cargotracker.routingqueue)
-    
-    Run command -> java -jar bookingms-0.0.1-SNAPSHOT.jar
+   
+    Run command -> java -jar bookingms-1.0.jar
     
     JSON Requests (Test via Postman) ->
     
     
-    Cargo Booking (http://localhost:8080/cargobooking)
+    Cargo Booking (http://localhost:8081/cargobooking)
     --------------------------------------------------
 
     {
@@ -97,21 +61,14 @@ Booking MS
         "destArrivalDeadline" : "2019-09-28"
     }
     
-    This returns a unique "Booking Id" which should be put into all requests with the placeholder <<BookingId>>
-    
-    Cargo Routing (http://localhost:8080/cargorouting)
-    --------------------------------------------------
-    {
-      "bookingId": "<<BookingId>>"
-    }
 
 
   Routing MS
 
     This MS takes care of all the operations associated with the routing of the Cargo. 
-    The MySql Schemas and the Rabbit MQ Exchanges have to be setup (creation and binding) before running this microservice
+    The MySql Schemas have to be setup before running this microservice
     
-    Server Port -> 8081
+    Server Port -> 8083
     Schema Name -> routingmsdb (user: routingmsdb / pw: routingmsdb)
     Tables ->
     
@@ -142,15 +99,14 @@ Booking MS
 	insert into carrier_movement (Id,arrival_location_id,departure_location_id,voyage_id,arrival_date,departure_date) 		values (1356,'JNTKO','CNHGH',4,'2019-09-10','2019-09-01');
 	insert into carrier_movement (Id,arrival_location_id,departure_location_id,voyage_id,arrival_date,departure_date) 		values (1357,'USNYC','JNTKO',5,'2019-09-25','2019-09-15');
 
-    Run command -> java -jar routingms-0.0.1-SNAPSHOT.jar
+    Run command -> java -jar routingms-1.0.jar
     
     
 Tracking MS
 
-    This MS takes care of all the tracking operations associated with the Cargo. 
-    The MySql Schemas and the Rabbit MQ Exchanges have to be setup (creation and binding) before running this microservice
+    This MS takes care of all the tracking operations associated with the Cargo. It stores events in Axon's event store and 	builds a projection for the Tracking Details (Tracking Projection) on a MySql Database. The MySql Schemas have to be setup 	before running this microservice
     
-    Server Port -> 8082
+    Server Port -> 8084
     Schema Name -> trackingmsdb (user: trackingmsdb/pw:trackingmsdb)
     Tables ->
     
@@ -173,34 +129,16 @@ Tracking MS
 	  PRIMARY KEY (`Id`)
 	) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
     
-    Run command -> java -jar trackingms-0.0.1-SNAPSHOT.jar
+    Run command -> java -jar trackingms-1.0-SNAPSHOT.jar
     
 
 Handling MS
     
-    This MS takes care of all the handling operations associated with the Cargo. 
-    The MySql Schemas and the Rabbit MQ Exchanges have to be setup (creation and binding) before running this microservice
+    This MS takes care of all the handling operations associated with the Cargo. It does not have any projections so only 	events are generated and stored in Axon's event store
     
-    Server Port -> 8084
-    Schema Name -> handlingmsdb (user: handlingmsdb/pw:handlingmsdb)
-    Tables ->
-
-    ##Handling_activity DDL
-	  CREATE TABLE `handling_activity` (
-	  `id` int(11) NOT NULL AUTO_INCREMENT,
-	  `event_completion_time` timestamp NULL DEFAULT NULL,
-	  `event_type` varchar(225) DEFAULT NULL,
-	  `booking_id` varchar(20) DEFAULT NULL,
-	  `voyage_number` varchar(100) DEFAULT NULL,
-	  `location` varchar(100) DEFAULT NULL,
-	  PRIMARY KEY (`id`)
-	) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+    Server Port -> 8082
     
-    Exchanges/Queues -> 
-    
-    Exchange (cargotracker.cargohandlings) -> Queue (cargotracker.handlingqueue) -> RoutingKey -> (cargohandlings)
-    
-    Run command -> java -jar handlingms.jar
+    Run command -> java -jar handlingms-1.0.jar
     
     JSON Requests (Test via Postman) ->
      
