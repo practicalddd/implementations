@@ -1,4 +1,4 @@
-# Axon Framework Implementation v4.2 with Axon Server Standard Edition v4.2
+# Axon Framework Implementation (v4.2) with Axon Server Standard Edition (v4.2)
 
 This Chapter contains a complete DDD implementation of the Cargo Tracker application utilizing the Axon Framework and the Axon Server Standard Edition v4.2
 
