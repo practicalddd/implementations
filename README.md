@@ -71,9 +71,13 @@ Week 5 (*Available*) - Axon Framework 4.2 + Axon Server 4.2 SE
 
 Week 6 (*In Progress*) - Jakarta EE 8 (Payara Server) + MySql
 
-Week 8 (*Planned*) - dapr.io
+Week 7 (*Planned*) - Quarkus
 
-Week 9 (*Planned*) - MicroProfile 3.0 + MySql + RabbitMQ
+Week 8 (*Planned*) - MicroProfile 3.0 + MySql + RabbitMQ
+
+Week 9 (*Planned*) - Micronaut FW
+
+Week 10 (*Planned*) - dapr.io
 
 
 
