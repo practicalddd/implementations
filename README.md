@@ -69,15 +69,15 @@ Week 4 (*Available*) - MicroProfile 2.2 (Payara Micro) + MySql + Payara Clustere
 
 Week 5 (*Available*) - Axon Framework 4.2 + Axon Server 4.2 SE
 
-Week 6 (*In Progress*) - Jakarta EE 8 (Payara Server) + MySql
+Week 6 (*Available*) - MicroProfile 2.2 (Kumuluzee v3.5) + MySql + RabbitMQ
 
-Week 7 (*Planned*) - Quarkus
+Week 7 (*In Progress*) - Spring Boot (Tomcat) + Spring Data + Spring Cloud + MySql + Kafka 
 
-Week 8 (*Planned*) - MicroProfile 3.0 + MySql + RabbitMQ
+Week 8 (*Planned*) - Quarkus
 
 Week 9 (*Planned*) - Micronaut FW
 
-Week 10 (*Planned*) - dapr.io
+Week 10 (*Planned*) - MicroProfile 3.0 + MySql + RabbitMQ
 
 
 
