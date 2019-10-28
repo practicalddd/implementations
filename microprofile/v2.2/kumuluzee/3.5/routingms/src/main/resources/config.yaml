@@ -1,0 +1,8 @@
+kumuluzee:
+  datasources:
+  - jndi-name: jdbc/routingms
+    connection-url: jdbc:mysql://localhost:3306/routingmsdb?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=EST
+    username: routingmsdb
+    password: routingmsdb
+    pool:
+      max-size: 5
