@@ -59,25 +59,18 @@ The Cargo Tracker Application acts as the reference application for the DDD impl
 
 The list below shows the current implementations available and what will be made available in the coming weeks. This is a 52-week exercise, so please check back for regular updates. 
 
-Week 1 (*Available*) - Spring Boot (Tomcat) + Spring Data + Spring Cloud + MySql + RabbitMQ 
+Implementation 1 (*Available*) - Spring Boot (Tomcat) + Spring Data + Spring Cloud + MySql + RabbitMQ 
 
-Week 2 (*Available*) - Jakarta EE 8 (Open Liberty 19.0.0.9) + MySql
+Implementation 2 (*Available*) - Jakarta EE 8 (Open Liberty 19.0.0.9) + MySql
 
-Week 3 (*Available*) - MicroProfile 3.0 (Helidon v1.3.1) + Oracle DB Autonomous Cloud + RabbitMQ
+Implementation 3 (*Available*) - MicroProfile 3.0 (Helidon v1.3.1) + Oracle DB Autonomous Cloud + RabbitMQ
 
-Week 4 (*Available*) - MicroProfile 2.2 (Payara Micro) + MySql + Payara Clustered Events
+Implementation 4 (*Available*) - MicroProfile 2.2 (Payara Micro) + MySql + Payara Clustered Events
 
-Week 5 (*Available*) - Axon Framework 4.2 + Axon Server 4.2 SE
+Implementation 5 (*Available*) - Axon Framework 4.2 + Axon Server 4.2 SE
 
-Week 6 (*Available*) - MicroProfile 2.2 (Kumuluzee v3.5) + MySql + RabbitMQ
+Implementation 6 (*Available*) - MicroProfile 2.2 (Kumuluzee v3.5) + MySql + RabbitMQ
 
-Week 7 (*In Progress*) - Spring Boot (Tomcat) + Spring Data + Spring Cloud + MySql + Kafka 
-
-Week 8 (*Planned*) - Quarkus
-
-Week 9 (*Planned*) - Micronaut FW
-
-Week 10 (*Planned*) - MicroProfile 3.0 + MySql + RabbitMQ
-
+Implementation 7 (*Planned*) - Quarkus
 
 
