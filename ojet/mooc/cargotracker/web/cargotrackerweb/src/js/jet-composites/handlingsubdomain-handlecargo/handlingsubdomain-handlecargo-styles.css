@@ -1,0 +1,8 @@
+handlingsubdomain-handlecargo:not(.oj-complete){
+  visibility: hidden;
+}
+
+handlingsubdomain-handlecargo{
+	min-height: 50px;
+	width: 50px;
+}

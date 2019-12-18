@@ -1,0 +1,8 @@
+bookingsubdomain-booknewcargo:not(.oj-complete){
+  visibility: hidden;
+}
+
+bookingsubdomain-booknewcargo{
+	min-height: 50px;
+	width: 50px;
+}

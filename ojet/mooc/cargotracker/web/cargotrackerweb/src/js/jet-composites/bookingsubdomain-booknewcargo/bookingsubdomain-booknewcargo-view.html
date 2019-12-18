@@ -1,0 +1,17 @@
+<!--
+  Copyright (c) 2015, 2019, Oracle and/or its affiliates.
+  The Universal Permissive License (UPL), Version 1.0
+-->
+<p>
+<oj-label for="amount" class="oj-sm-padding-2x-top">Amount:</oj-label>
+<oj-input-text id="amount"></oj-input-text>
+<oj-label for="origin" class="oj-sm-padding-2x-top" value="{{origin}}">Origin:</oj-label>
+<oj-select-one id="origin">
+  <oj-option value="USNYC"></oj-option>
+</oj-select-one>
+<oj-label for="destination" class="oj-sm-padding-2x-top" value="{{destination}}">Destination:</oj-label>
+<oj-select-one id="destination">
+  <oj-option value="USNYC"></oj-option>
+</oj-select-one>
+<oj-button><span slot='startIcon' class="fas fa-reply">Book Cargo</span></oj-button>
+</p>

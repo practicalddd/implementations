@@ -1,0 +1,8 @@
+trackingsubdomain-trackcargo:not(.oj-complete){
+  visibility: hidden;
+}
+
+trackingsubdomain-trackcargo{
+	min-height: 50px;
+	width: 50px;
+}

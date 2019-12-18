@@ -1,0 +1,8 @@
+routingsubdomain-routecargo:not(.oj-complete){
+  visibility: hidden;
+}
+
+routingsubdomain-routecargo{
+	min-height: 50px;
+	width: 50px;
+}

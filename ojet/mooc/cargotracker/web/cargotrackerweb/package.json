@@ -1,0 +1,15 @@
+{
+  "name": "cargotrackerweb",
+  "version": "1.0.0",
+  "description": "An Oracle JavaScript Extension Toolkit(JET) web app",
+  "dependencies": {
+    "@oracle/oraclejet": "~8.0.0"
+  },
+  "devDependencies": {
+    "@oracle/oraclejet-tooling": "~8.0.0"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "private": true
+}

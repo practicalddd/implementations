@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!--
+ Copyright (c) 2014, 2019, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+
+<!-- ************************ IMPORTANT INFORMATION ************************************
+  This web navigation bar template is provided as an example of how to configure
+  a JET web application with a navigation bar as a single page application
+  using ojRouter and oj-module.  It contains the Oracle JET framework and a default
+  requireJS configuration file to show how JET can be setup in a common application.
+  This project template can be used in conjunction with demo code from the JET
+  website to test JET component behavior and interactions.
+
+  Any CSS styling with the prefix "demo-" is for demonstration only and is not
+  provided as part of the JET framework.
+
+  Please see the demos under Cookbook/Patterns/App Shell: Web and the CSS documentation
+  under Support/API Docs/Non-Component Styling on the JET website for more information on how to use 
+  the best practice patterns shown in this template.
+
+  Aria Landmark role attributes are added to the different sections of the application
+  for accessibility compliance. If you change the type of content for a specific
+  section from what is defined, you should also change the role value for that
+  section to represent the appropriate content type.
+  ***************************** IMPORTANT INFORMATION ************************************ -->
+<html lang="en-us">
+  <head>
+    <title>Oracle JET Starter Template - Web Nav Bar</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1">
+    <link rel="icon" href="css/images/favicon.ico" type="image/x-icon" />
+
+    <!-- This is the main css file for the default Alta theme -->
+    <!-- injector:theme -->
+    <link rel="stylesheet" href="css/libs/oj/v8.0.0/alta/oj-alta-min.css" type="text/css"/>
+    <!-- endinjector -->
+    
+    <!-- This contains icon fonts used by the starter template -->
+    <link rel="stylesheet" href="css/demo-alta-site-min.css" type="text/css"/>
+
+    <!-- This is where you would add any app specific styling -->
+    <link rel="stylesheet" href="css/app.css" type="text/css"/>
+
+  </head>
+  <body class="oj-web-applayout-body">
+    <!-- Template for rendering navigation items -->
+    <script type="text/html" id="navTemplate">
+      <li><a href="#">
+        <span :class="[[$data['iconClass']]]"></span>
+        <oj-bind-text value="[[$data['name']]]"></oj-bind-text>
+      </a></li>
+    </script>
+
+    <div id="globalBody" class="oj-web-applayout-page">
+
+      <div id="announce" tabindex="-1" class="sendOffScreen" :aria-live="[[manner]]" aria-atomic="true">
+          <p id="ariaLiveMessage"><oj-bind-text value="[[message]]"></oj-bind-text></p>
+      </div>
+      
+      <!--
+         ** Oracle JET V8.0.0 web application navigation bar and header patterns.
+         ** Please see the demos under Cookbook/Patterns/App Shell: Web
+         ** and the CSS documentation under Support/API Docs/Non-Component Styling
+         ** on the JET website for more information on how to use this pattern.
+      -->
+      <header role="banner" class="oj-web-applayout-header">
+        <div class="oj-web-applayout-max-width oj-flex-bar oj-sm-align-items-center">
+          <div class="oj-flex-bar-middle oj-sm-align-items-baseline">
+            <h1 class="oj-sm-only-hide oj-web-applayout-header-title" title="Application Name"><oj-bind-text value="[[appName]]"></oj-bind-text></h1>
+          </div>
+          <div class="oj-flex-bar-end">
+            <!-- Responsive Toolbar -->
+            <oj-toolbar>
+              <oj-menu-button id="userMenu" display="[[smScreen() ? 'icons' : 'all']]" chroming="half">
+                <span><oj-bind-text value="[[userLogin]]"></oj-bind-text></span>
+                <span slot="endIcon" :class="[[{'oj-icon demo-appheader-avatar': smScreen(), 'oj-component-icon oj-button-menu-dropdown-icon': !smScreen()}]]"></span>
+                <oj-menu id="menu1" slot="menu" style="display:none">
+                  <oj-option id="pref" value="pref">Preferences</oj-option>
+                  <oj-option id="help" value="help">Help</oj-option>
+                  <oj-option id="about" value="about">About</oj-option>
+                  <oj-option id="out" value="out">Sign Out</oj-option>
+                </oj-menu>
+              </oj-menu-button>
+            </oj-toolbar>
+          </div>
+        </div>
+        <div role="navigation" class="oj-web-applayout-max-width oj-web-applayout-navbar">
+          <oj-navigation-list id="navList" data="[[navDataProvider]]"
+                              :class="[[{'oj-md-condense oj-md-justify-content-flex-end': !smScreen()}]]"
+                              display="[[smScreen() ? 'icons' : 'all']]"
+                              edge="top"
+                              item.renderer="[[KnockoutTemplateUtils.getRenderer('navTemplate', true)]]"
+                              selection="{{router.stateId}}">
+          </oj-navigation-list>
+        </div>
+      </header>
+      <oj-module role="main" class="oj-web-applayout-max-width oj-web-applayout-content" config="[[moduleConfig]]">
+      </oj-module>
+      <footer class="oj-web-applayout-footer" role="contentinfo">
+        <div class="oj-web-applayout-footer-item oj-web-applayout-max-width">
+          <ul>
+            <oj-bind-for-each data="[[footerLinks]]">
+              <template>
+                <li><a :id="[[$current.data.linkId]]" :href="[[$current.data.linkTarget]]"><oj-bind-text value="[[$current.data.name]]"></oj-bind-text></a></li>
+              </template>
+            </oj-bind-for-each>
+          </ul>
+        </div>
+        <div class="oj-web-applayout-footer-item oj-web-applayout-max-width oj-text-secondary-color oj-text-sm">
+          Copyright © 2014, 2019 Oracle and/or its affiliates All rights reserved.
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="js/libs/require/require.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+  </body>
+
+</html>
