@@ -1,7 +1,6 @@
-# Jakarta EE 8 Implementation utilizing Open Liberty
+# Jakarta EE 8 Implementation utilizing Payara Server
 
-This Chapter contains a complete DDD implementation of the Cargo Tracker application based on the Jakarta EE Platform utilizing 
-the OpenLiberty (v19.0.0.9) implementation
+This Chapter contains a complete DDD implementation of the Cargo Tracker application based on the Jakarta EE Platform utilizing the Payara Server (v5.194) implementation
 
 The implementation adopts a modulithic based architectural style and uses the following technologies
   - Jakarta EE v8.0 as the core chassis
