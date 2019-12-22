@@ -148,11 +148,9 @@ Handling Module
    
   # Running the application
   
-    Execute maven command mvn install . This command builds the cargotracker application and creates a .war file in the target directory. 
-    It also configures and installs Open Liberty into the target/liberty/wlp directory.
+    Execute maven command mvn install . This command builds the cargotracker application and creates a .war file in the target directory. You can install it on a Payara server
+   
     
-    Execute maven command mvn liberty:start server. This goal starts an Open Liberty server instance. 
-    The  pom.xml is already configured to start the application in this server instance.
    
   # JSON Requests (Test via Postman) ->
     
